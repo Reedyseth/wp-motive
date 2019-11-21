@@ -1,0 +1,14 @@
+{
+    "name": "reedyseth/wp-motive",
+    "description": "WordPress Plugin Test for Awesome Motive.",
+    "type": "wordpress-plugin",
+    "license": "GPL-2.0+",
+    "authors": [
+        {
+            "name": "reedyseth",
+            "email": "reedyseth@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
