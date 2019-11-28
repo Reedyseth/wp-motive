@@ -9,6 +9,11 @@
             "email": "reedyseth@gmail.com"
         }
     ],
+    "autoload": {
+        "psr-4": {
+            "Wp_Motive\\": "includes/"
+        }
+    },
     "minimum-stability": "dev",
     "require": {}
 }

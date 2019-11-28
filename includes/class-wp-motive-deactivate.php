@@ -1,5 +1,5 @@
 <?php
-
+namespace Wp_Motive;
 /**
  * Fired during plugin deactivation
  *
@@ -18,19 +18,20 @@
  * @since      1.0.0
  * @package    Wp_Motive
  * @subpackage Wp_Motive/includes
- * @author     reedyseth <reedyseth@gmail.com>
+ * @author     Israel Barragan (Reedyseth) <reedyseth@gmail.com>
  */
-class Wp_Motive_Deactivator {
+class Wp_Motive_Deactivate {
 
-	/**
-	 * Short Description. (use period)
-	 *
-	 * Long Description.
-	 *
-	 * @since    1.0.0
-	 */
-	public static function deactivate() {
-
-	}
+    /**
+     * Short Description. (use period)
+     *
+     * Long Description.
+     *
+     * @since    1.0.0
+     */
+    public static function deactivate() {
+        $logger = new Logger();
+        $logger->log("deactivate() function executed.!!\n");
+    }
 
 }

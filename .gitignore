@@ -1,4 +1,4 @@
-#################
+################
 ## Eclipse
 #################
 
@@ -162,6 +162,7 @@ pip-log.txt
 
 # Composer vendor directory
 src/vendor/
+vendor/
 
 # Bower Components
 src/bower_components/
@@ -171,5 +172,3 @@ node_modules/
 packages-lock.json
 
 # Others
-src/utils/log.txt
-src/utils/systemInformation.txt

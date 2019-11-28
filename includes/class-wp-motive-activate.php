@@ -1,5 +1,5 @@
 <?php
-
+namespace Wp_Motive;
 /**
  * Fired during plugin activation
  *
@@ -18,19 +18,20 @@
  * @since      1.0.0
  * @package    Wp_Motive
  * @subpackage Wp_Motive/includes
- * @author     reedyseth <reedyseth@gmail.com>
+ * @author     Israel Barragan (Reedyseth) <reedyseth@gmail.com>
  */
-class Wp_Motive_Activator {
+class Wp_Motive_Activate {
 
-	/**
-	 * Short Description. (use period)
-	 *
-	 * Long Description.
-	 *
-	 * @since    1.0.0
-	 */
-	public static function activate() {
-
-	}
+    /**
+     * Short Description. (use period)
+     *
+     * Long Description.
+     *
+     * @since    1.0.0
+     */
+    public static function activate() {
+        $logger = new Logger();
+        $logger->log("activate() function executed.!!\n");
+    }
 
 }
