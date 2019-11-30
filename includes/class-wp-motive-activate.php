@@ -23,14 +23,11 @@ namespace Wp_Motive;
 class Wp_Motive_Activate {
 
     /**
-     * Short Description. (use period)
-     *
-     * Long Description.
      *
      * @since    1.0.0
      */
     public static function activate() {
-        $logger = new Logger();
+        $logger = new Wp_Motive_Logger();
         $logger->log("activate() function executed.!!\n");
     }
 

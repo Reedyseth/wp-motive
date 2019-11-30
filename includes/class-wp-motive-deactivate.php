@@ -23,14 +23,11 @@ namespace Wp_Motive;
 class Wp_Motive_Deactivate {
 
     /**
-     * Short Description. (use period)
-     *
-     * Long Description.
      *
      * @since    1.0.0
      */
     public static function deactivate() {
-        $logger = new Logger();
+        $logger = new Wp_Motive_Logger();
         $logger->log("deactivate() function executed.!!\n");
     }
 

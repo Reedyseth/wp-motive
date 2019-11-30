@@ -11,7 +11,7 @@ namespace Wp_Motive;
  * @subpackage Wp_Motive/includes
  * @author Israel Barragan (Reedyseth) <reedyseth@gmail.com>
  */
-class Logger
+class Wp_Motive_Logger
 {
     private $filename = "error.log";
     private $path = "";
