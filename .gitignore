@@ -172,3 +172,4 @@ node_modules/
 packages-lock.json
 
 # Others
+log/*.log

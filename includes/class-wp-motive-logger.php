@@ -6,6 +6,7 @@ namespace Wp_Motive;
  * This class logs information submitted by the plugin.
   * @link       http://behstant.com/blog
  * @since      1.0.0
+ * @since      29-Nov-2019
  *
  * @package    Wp_Motive
  * @subpackage Wp_Motive/includes

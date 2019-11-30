@@ -6,6 +6,7 @@ namespace Wp_Motive;
   *
  * @link       http://behstant.com/blog
  * @since      1.0.0
+ * @since      29-Nov-2019
  * @author     Israel Barragan (Reedyseth) <reedyseth@gmail.com>
  *
  * @package    Wp_Motive
