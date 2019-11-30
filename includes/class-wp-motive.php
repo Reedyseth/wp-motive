@@ -5,6 +5,7 @@ namespace Wp_Motive;
  *
  * @link       http://behstant.com/blog
  * @since      1.0.0
+ * @since      29-Nov-2019
  *
  * @package    Wp_Motive
  * @subpackage Wp_Motive/includes
@@ -21,6 +22,7 @@ class Wp_Motive
 {
     protected $version;
     protected $plugin_version;
+    protected $hooks;
 
     public function __construct()
     {
@@ -30,9 +32,10 @@ class Wp_Motive
         else {
             $this->plugin_version = "1.0.0";
         }
+        $this->hooks = new Wp_Motive_Hooks();
         $this->load_dependencies();
         $this->set_locale();
-        $this->define_admin_hooks();
+        $this->load_admin();
         $this->define_public_hooks();
     }
 
@@ -49,10 +52,11 @@ class Wp_Motive
     private function set_locale()
     {
         $plugin_i18n = new Wp_Motive_i18n();
+        $this->hooks->add_actions("plugins_loaded", $plugin_i18n, "load_plugin_textdomain");
     }
-    private function define_admin_hooks()
+    private function load_admin()
     {
-
+        $wp_motive_admin = new Wp_Motive_Admin();
     }
     private function define_public_hooks()
     {
