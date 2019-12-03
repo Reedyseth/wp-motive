@@ -11,7 +11,7 @@
         var wpMotiveTableBody = $('.wp-motive-table-data tbody');
         var bodyContent = '';
 
-        $.when( endPointRequest( endPoint ) ).done( function ( result ) {
+        $.when( endPointRequest( endPoint, wpMotiveTableBody ) ).done( function ( result ) {
 
             if ( result !== undefined ) {
                 for( var key in result.data.rows ) {
@@ -40,11 +40,17 @@
         });
     });
 
-    function endPointRequest( _endPoint ) {
+    function endPointRequest( _endPoint, _wpMotiveTableBody ) {
         return $.ajax({
             url: _endPoint,
             type: 'get',
-            dataType: 'json'
+            dataType: 'json',
+            beforeSend: function () {
+                var bodyContent = '<tr>';
+                bodyContent += '<td colspan="5"><span class="ajax-loader"></span></td>';
+                bodyContent += '</tr>';
+                _wpMotiveTableBody.html(bodyContent);
+            }
         });
     }
 

@@ -105,7 +105,7 @@ class Wp_Motive_Admin
                                         <th>" . __("Date","wp-motive") ."</th>
                                     </tr>
                                 </thead>
-                                <tbody></tbody>
+                                <tbody><tr><td colspan='5'>" . __("No data to show","wp-motive") ."</td></tr></tbody>
                             </table>                                                                 
                         </div>
                     </div>

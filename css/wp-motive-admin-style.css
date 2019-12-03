@@ -25,4 +25,12 @@
 .wp-motive-table-data tbody tr:nth-child(even){
     background-color: #ddd;
 }
+
+.ajax-loader {
+    background-image: url(../images/ajax-loader.gif);
+    background-repeat: no-repeat;
+    display: inline-block;
+    height: 10px;
+    width: 100px;
+}
 /*# sourceMappingURL=smtp-admin.min.css.map */
