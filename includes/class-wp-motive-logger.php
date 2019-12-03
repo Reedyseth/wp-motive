@@ -42,8 +42,11 @@ class Wp_Motive_Logger
         }
     }
 
-    public function log( $message="" ){
+    public function log( $message="" )
+    {
         $date = date( $this->dateFormat );
+//	    var_dump($this->dateFormat );
+//	    var_dump($date);
         $result = fputs( $this->file, "[ {$date} ] - " . $message );
 
         return $result===false ? false : true;
