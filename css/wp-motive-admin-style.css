@@ -7,7 +7,7 @@
     border-collapse: collapse;
 }
 
-.wp-motive-table-data thead {
+.wp-motive-table-data thead tr {
     background-color: white;
     height: 50px;
 }
