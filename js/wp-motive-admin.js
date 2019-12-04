@@ -10,6 +10,9 @@
         var endPoint = 'https://miusage.com/v1/challenge/1/';
         var wpMotiveTableBody = $('.wp-motive-table-data tbody');
         var bodyContent = '';
+        var tableReloadStatus = 1;
+        var tableReloadSchedule = false;
+        $('.reload-data-container .btn-reload-data').on('click', reloadTable);
 
         $.when( endPointRequest( endPoint, wpMotiveTableBody ) ).done( function ( result ) {
 
@@ -36,6 +39,7 @@
                 bodyContent += '<td colspan="5">No data to show</td>';
                 bodyContent += '</tr>';
                 wpMotiveTableBody.html( bodyContent );
+                bodyContent = ''; // Housekeeping
             }
         });
     });
@@ -45,13 +49,17 @@
             url: _endPoint,
             type: 'get',
             dataType: 'json',
-            beforeSend: function () {
+            beforeSend: function (){
                 var bodyContent = '<tr>';
                 bodyContent += '<td colspan="5"><span class="ajax-loader"></span></td>';
                 bodyContent += '</tr>';
                 _wpMotiveTableBody.html(bodyContent);
             }
         });
+    }
+
+    function reloadTable(){
+
     }
 
     function readableDate( _unixTimeStamp ){

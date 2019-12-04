@@ -27,6 +27,7 @@ class Wp_Motive_Admin
     protected $hooks = null;
     private $slug = "";
     private $resources = null;
+    private $data_schedule = null;
 
     public function __construct($slug, $plugin_url, $plugin_version)
     {
@@ -84,7 +85,7 @@ class Wp_Motive_Admin
     public function admin_page(){
 
         echo "<div class='wp-mail-smtp-page-content'>
-                <form method='POST' action='' autocomplete='off'>
+                <form method='POST' action='' autocomplete='off' class='wp-motive-form'>
                     <div class='wp-mail-smtp-setting-row wp-mail-smtp-setting-row-content wp-mail-smtp-clear section-heading'>
                         <div class='wp-mail-smtp-setting-field'>                                                                    
                                 <h2>" . __("Ajax Endpoint","wp-motive") ."</h2>
@@ -95,6 +96,14 @@ class Wp_Motive_Admin
                     </div>
                     <div class='wp-mail-smtp-setting-row wp-mail-smtp-setting-row-content wp-mail-smtp-clear section-heading'>
                         <div class='wp-mail-smtp-setting-field'>
+                            <div class='reload-data-container'>
+                                <input type='hidden' name='wp_motive_request_period' value='" . esc_attr( get_option("wp_motive_request_period") ) ."'/>
+                                <input type='hidden' name='wp_motive_request_status' value='" . esc_attr( get_option("wp_motive_request_status") ) ."'/>
+                                <button type='submit' class='wp-mail-smtp-btn wp-mail-smtp-btn-md wp-mail-smtp-btn-orange btn-reload-data'>
+                                    " . __("Reload","wp-motive") ."
+                                </button>
+                            </div>
+                            
                             <table class='wp-motive-table-data'>
                                 <thead>
                                     <tr>
