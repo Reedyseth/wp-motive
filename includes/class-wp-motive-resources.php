@@ -32,6 +32,7 @@ class Wp_Motive_Resources {
     public function enqueue_admin_scripts() {
         $path = $this->plugin_url . "js/wp-motive-admin.js";
         wp_enqueue_script( "wp-motive-admin-scripts", $path, array("jquery"), $this->plugin_version, true );
+        wp_localize_script("wp-motive-admin-scripts","wp_motive", ["ajax_url" => admin_url("admin-ajax.php")] );
     }
 
     public function enqueue_admin_styles() {
