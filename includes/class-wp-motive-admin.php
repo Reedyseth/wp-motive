@@ -44,6 +44,7 @@ class Wp_Motive_Admin
         $this->hooks->add_actions("in_admin_header", $this, "display_admin_header");
         $this->hooks->add_actions("admin_enqueue_scripts", $this->resources, "enqueue_admin_scripts");
         $this->hooks->add_actions("admin_enqueue_scripts", $this->resources, "enqueue_admin_styles");
+        $this->hooks->add_actions("wp_ajax_wp_motive_update_options", $this, "update_options");
     }
 
     public function admin_menu()
@@ -84,6 +85,8 @@ class Wp_Motive_Admin
 
     public function admin_page(){
 
+        $update_nonce = wp_create_nonce( "wp_motive_nonce_update_options" );
+
         echo "<div class='wp-mail-smtp-page-content'>
                 <form method='POST' action='' autocomplete='off' class='wp-motive-form'>
                     <div class='wp-mail-smtp-setting-row wp-mail-smtp-setting-row-content wp-mail-smtp-clear section-heading'>
@@ -97,8 +100,9 @@ class Wp_Motive_Admin
                     <div class='wp-mail-smtp-setting-row wp-mail-smtp-setting-row-content wp-mail-smtp-clear section-heading'>
                         <div class='wp-mail-smtp-setting-field'>
                             <div class='reload-data-container'>
+                                <input type='hidden' name='wp_motive_nonce_update_options' value='" . $update_nonce ."'/>
                                 <input type='hidden' name='wp_motive_request_period' value='" . esc_attr( get_option("wp_motive_request_period") ) ."'/>
-                                <input type='hidden' name='wp_motive_request_status' value='" . esc_attr( get_option("wp_motive_request_status") ) ."'/>
+                                <input type='hidden' name='wp_motive_data_loaded_status' value='" . esc_attr( get_option("wp_motive_data_loaded_status") ) ."'/>
                                 <button type='submit' class='wp-mail-smtp-btn wp-mail-smtp-btn-md wp-mail-smtp-btn-orange btn-reload-data'>
                                     " . __("Reload","wp-motive") ."
                                 </button>
@@ -122,5 +126,73 @@ class Wp_Motive_Admin
               </div>"; // Closes <div class='wp-mail-smtp-page-content'>
             echo "</div>"; // Closes <div class="wrap" id="wp-mail-smtp">
         echo "</div>"; // Closes <div id="wpbody-content">
+    }
+
+    /**
+     * Update a Plugin Option with the given name and value.
+     *
+     * @version 1.0.0
+     * @since 04-Dic-2019
+     * @author Israel Barragan (Reedyseth) <reedyseth@gmail.com>
+     *
+     * @return json encoded data with the result.
+     */
+    public function update_options()
+    {
+        $result = [
+            "status" => "failed",
+            "code" => 401
+        ];
+        // Check Nonce
+        $data = isset($_POST) ? $_POST : null;
+        if( $data !== null ){
+            $option_name = sanitize_text_field(trim($_POST["option_name"]));
+            $option_value = sanitize_text_field(trim($_POST["option_value"]));
+            // Check for the nonce key, if not correct 'check_admin_referer' will die the execution.
+            check_admin_referer("wp_motive_nonce_update_options", "security");
+
+            update_option( sanitize_text_field( $option_name ), sanitize_text_field( $option_value ) );
+            $result = [
+                "status" => "ok",
+                "code" => 200
+            ];
+            return wp_send_json_success($result);
+        }
+
+        return wp_send_json_error($result);
+    }
+
+    /**
+     * Save a local users information on the database to retrieve it instead of the endpoint
+     *
+     * @version 1.0.0
+     * @since 05-Dic-2019
+     * @author Israel Barragan (Reedyseth) <reedyseth@gmail.com>
+
+     * @return json encoded data with the result.
+     */
+    public function cache_endpoint_data()
+    {
+        $result = [
+            "status" => "failed",
+            "code" => 401
+        ];
+        // Check Nonce
+        $data = isset($_POST) ? $_POST : null;
+        if( $data !== null ){
+            $option_name = sanitize_text_field(trim($_POST["option_name"]));
+            $option_value = sanitize_text_field(trim($_POST["option_value"]));
+            // Check for the nonce key, if not correct 'check_admin_referer' will die the execution.
+            check_admin_referer("wp_motive_nonce_update_options", "security");
+
+            update_option( sanitize_text_field( $option_name ), sanitize_text_field( $option_value ) );
+            $result = [
+                "status" => "ok",
+                "code" => 200
+            ];
+            return wp_send_json_success($result);
+        }
+
+        return wp_send_json_error($result);
     }
 }
