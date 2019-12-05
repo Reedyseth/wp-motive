@@ -34,7 +34,7 @@ class Wp_Motive_Activate {
          */
         $options = array(
             $options_prefix . "request_period" => "3600",
-            $options_prefix . "request_status" => "no",
+            $options_prefix . "data_loaded_status" => "no"
         );
 
         $logger = new Wp_Motive_Logger();
