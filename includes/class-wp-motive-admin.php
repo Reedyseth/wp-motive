@@ -45,6 +45,8 @@ class Wp_Motive_Admin
         $this->hooks->add_actions("admin_enqueue_scripts", $this->resources, "enqueue_admin_scripts");
         $this->hooks->add_actions("admin_enqueue_scripts", $this->resources, "enqueue_admin_styles");
         $this->hooks->add_actions("wp_ajax_wp_motive_update_options", $this, "update_options");
+        $this->hooks->add_actions("wp_ajax_wp_motive_cache_data", $this, "cache_endpoint_data");
+        $this->hooks->add_actions("wp_ajax_wp_motive_load_cache_data", $this, "reload_cache_data");
     }
 
     public function admin_menu()
@@ -151,7 +153,7 @@ class Wp_Motive_Admin
             // Check for the nonce key, if not correct 'check_admin_referer' will die the execution.
             check_admin_referer("wp_motive_nonce_update_options", "security");
 
-            update_option( sanitize_text_field( $option_name ), sanitize_text_field( $option_value ) );
+            update_option( $option_name, $option_value);
             $result = [
                 "status" => "ok",
                 "code" => 200
@@ -180,15 +182,46 @@ class Wp_Motive_Admin
         // Check Nonce
         $data = isset($_POST) ? $_POST : null;
         if( $data !== null ){
-            $option_name = sanitize_text_field(trim($_POST["option_name"]));
-            $option_value = sanitize_text_field(trim($_POST["option_value"]));
+            $users_data = sanitize_text_field(trim($_POST["users_data"]));
             // Check for the nonce key, if not correct 'check_admin_referer' will die the execution.
             check_admin_referer("wp_motive_nonce_update_options", "security");
 
-            update_option( sanitize_text_field( $option_name ), sanitize_text_field( $option_value ) );
+            update_option( "wp_motive_cache_users_data", $users_data );
             $result = [
                 "status" => "ok",
                 "code" => 200
+            ];
+            return wp_send_json_success($result);
+        }
+
+        return wp_send_json_error($result);
+    }
+    /**
+     * Reload users data already cache on the database.
+     *
+     * @version 1.0.0
+     * @since 06-Dic-2019
+     * @author Israel Barragan (Reedyseth) <reedyseth@gmail.com>
+
+     * @return json encoded data with the result.
+     */
+    public function reload_cache_data()
+    {
+        $result = [
+            "status" => "failed",
+            "code" => 401
+        ];
+        // Check Nonce
+        $data = isset($_POST) ? $_POST : null;
+        if( $data !== null ){
+            // Check for the nonce key, if not correct 'check_admin_referer' will die the execution.
+            check_admin_referer("wp_motive_nonce_update_options", "security");
+            //sleep(10);
+            $users_data = stripslashes( get_option( "wp_motive_cache_users_data" ) );
+            $result = [
+                "status" => "ok",
+                "code" => 200,
+                "users_data" => $users_data
             ];
             return wp_send_json_success($result);
         }

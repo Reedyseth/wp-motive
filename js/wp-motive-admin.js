@@ -15,7 +15,7 @@
         var wp_motive_request_period     = optionsForm.find('input[name="wp_motive_request_period"]').val();
         var usersData                    = [];
         var self = this;
-        $('.reload-data-container .btn-reload-data').on('click', reloadTable);
+        $('.reload-data-container .btn-reload-data').on('click', reloadTable() );
 
         if( wp_motive_data_loaded_status === "no" ){
             $.when( endPointRequest( endPoint, wpMotiveTableBody ) ).done( function ( result ) {
@@ -43,14 +43,15 @@
                             user.fname = fname;
                             user.lname = lname;
                             user.email = email;
+                            user.date  = userDate;
                             // Add it to the array
                             usersData.push(user);
                         }
                     }
                     wpMotiveTableBody.html( bodyContent );
                     // Update Plugin Option
-                    updatePluginOption(optionsForm, 'wp_motive_data_loaded_status', 'yes' );
-                    cacheEndpointData( usersData );
+                    updatePluginOption( optionsForm, 'wp_motive_data_loaded_status', 'yes' );
+                    cacheEndpointData( optionsForm, usersData );
                     bodyContent = ''; // Housekeeping
                 }
                 else {
@@ -63,7 +64,35 @@
             });
         }
         else if( wp_motive_data_loaded_status === "yes" ){ //data already retrieved from endpoint, so load it from local
+            $.when( reloadCachedTable(optionsForm, wpMotiveTableBody) ).done( function ( result ) {
+                var usersData = null;
 
+                if ( result !== undefined ) {
+                    // first let us convert the value to o valid JSON
+                    usersData = JSON.parse( result.data.users_data );
+
+                    for( var key in usersData ) {
+                        if( usersData.hasOwnProperty( key ) ){
+                            bodyContent += '<tr>';
+                            bodyContent += '<td>'+ usersData[key].id +'</td>';
+                            bodyContent += '<td>'+ usersData[key].fname +'</td>';
+                            bodyContent += '<td>'+ usersData[key].lname +'</td>';
+                            bodyContent += '<td>'+ usersData[key].email +'</td>';
+                            bodyContent += '<td>'+ usersData[key].date +'</td>';
+                            bodyContent += '</tr>';
+                        }
+                    }
+                    wpMotiveTableBody.html( bodyContent );
+                    bodyContent = ''; // Housekeeping
+                }
+                else {
+                    bodyContent += '<tr>';
+                    bodyContent += '<td colspan="5">No data to show</td>';
+                    bodyContent += '</tr>';
+                    wpMotiveTableBody.html( bodyContent );
+                    bodyContent = ''; // Housekeeping
+                }
+            });
         }
     });
 
@@ -82,9 +111,32 @@
         });
     }
 
-    function reloadTable()
+    function reloadCachedTable( _optionsForm, _wpMotiveTableBody )
     {
+        var nonce = _optionsForm.find('input[name="wp_motive_nonce_update_options"]').val();
+        var data = {
+            "security": nonce,
+            "action": "wp_motive_load_cache_data"
+        };
 
+        return $.ajax({
+            type: "post",
+            url: wp_motive.ajax_url,
+            dataType: "json",
+            data: data,
+            beforeSend: function (){
+                var bodyContent = '<tr>';
+                bodyContent += '<td colspan="5"><span class="ajax-loader"></span></td>';
+                bodyContent += '</tr>';
+                _wpMotiveTableBody.html(bodyContent);
+            }
+        });
+    }
+
+    function reloadTable() {
+        // make the request to the server to ask if the data loaded is on time limit.
+        // if the time limit expired make a new request to the endpoint
+        // if the time limit is not expired notify the user that the data loaded is on time limit.
     }
 
     function updatePluginOption( _optionsForm, _option_name, _option_value )
@@ -123,9 +175,38 @@
         // console.log(wp_motive);
     }
 
-    function cacheEndpointData( _cacheEndpointData )
+    function cacheEndpointData( _optionsForm, _usersData )
     {
-        console.log(_cacheEndpointData);
+        var nonce = _optionsForm.find('input[name="wp_motive_nonce_update_options"]').val();
+        var data = {
+            "security": nonce,
+            "action": "wp_motive_cache_data",
+            "users_data": JSON.stringify(_usersData)
+        };
+
+        $.ajax({
+            type: "post",
+            url: wp_motive.ajax_url,
+            dataType: "json",
+            data: data
+        }).done(function(result) {
+            if(typeof result === "object" && result.success === true){
+                console.log("Table Cached Successfully.!!");
+                console.log(result);
+
+            }
+            else if(typeof result === "object" && result.success === false){
+                console.log("Could not retrieve information.!!");
+                console.log(result);
+
+            }
+        }).fail(function ( xhr, status, error) {
+            // Something wrong on the server side.
+            // console.log("Fail status: ");
+            // console.log(status);
+            // console.log("Fail error: ");
+            // console.log(error);
+        });
     }
 
     function readableDate( _unixTimeStamp )
