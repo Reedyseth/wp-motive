@@ -47,6 +47,7 @@ class Wp_Motive_Admin
         $this->hooks->add_actions("wp_ajax_wp_motive_update_options", $this, "update_options");
         $this->hooks->add_actions("wp_ajax_wp_motive_cache_data", $this, "cache_endpoint_data");
         $this->hooks->add_actions("wp_ajax_wp_motive_load_cache_data", $this, "reload_cache_data");
+        $this->hooks->add_actions("wp_ajax_wp_motive_loaded_table_time", $this, "save_loaded_table_time");
     }
 
     public function admin_menu()
@@ -88,6 +89,8 @@ class Wp_Motive_Admin
     public function admin_page(){
 
         $update_nonce = wp_create_nonce( "wp_motive_nonce_update_options" );
+        $time_period  = unserialize( get_option("wp_motive_request_period") );
+        $time         = $time_period["time"];
 
         echo "<div class='wp-mail-smtp-page-content'>
                 <form method='POST' action='' autocomplete='off' class='wp-motive-form'>
@@ -103,7 +106,7 @@ class Wp_Motive_Admin
                         <div class='wp-mail-smtp-setting-field'>
                             <div class='reload-data-container'>
                                 <input type='hidden' name='wp_motive_nonce_update_options' value='" . $update_nonce ."'/>
-                                <input type='hidden' name='wp_motive_request_period' value='" . esc_attr( get_option("wp_motive_request_period") ) ."'/>
+                                <input type='hidden' name='wp_motive_request_period' value='" . esc_attr( $time ) ."'/>
                                 <input type='hidden' name='wp_motive_data_loaded_status' value='" . esc_attr( get_option("wp_motive_data_loaded_status") ) ."'/>
                                 <button type='submit' class='wp-mail-smtp-btn wp-mail-smtp-btn-md wp-mail-smtp-btn-orange btn-reload-data'>
                                     " . __("Reload","wp-motive") ."
@@ -162,6 +165,52 @@ class Wp_Motive_Admin
         }
 
         return wp_send_json_error($result);
+    }
+
+    public function save_loaded_table_time()
+    {
+        $result = [
+            "status" => "failed",
+            "code" => 401
+        ];
+        // Check Nonce
+        $data = isset($_POST) ? $_POST : null;
+        if( $data !== null ){
+            $date = date_create();
+            $unixTimeStamp = date_timestamp_get( $date );
+            echo $date->getTimestamp();
+            // Check for the nonce key, if not correct 'check_admin_referer' will die the execution.
+            check_admin_referer("wp_motive_nonce_update_options", "security");
+            $this->save_array_option_by_key( "wp_motive_request_period", "start_datetime", $unixTimeStamp );
+
+            $result = [
+                "status" => "ok",
+                "code" => 200
+            ];
+            return wp_send_json_success($result);
+        }
+
+        return wp_send_json_error($result);
+    }
+
+    /**
+     * Retrieve an option value already serialized and convert it to an array. Update
+     * the array value to the given one. This only work at the first level of the array.
+     * If the array contains more nested arrays then some other method should be use.
+     *
+     * @since 08-Dic-2019
+     * @version 1.0.0
+     * @author Israel Barragan (Reedyseth)
+     *
+     * @param $_option_name
+     * @param $_key
+     * @param $_value
+     */
+    public function save_array_option_by_key( $_option_name, $_key, $_value )
+    {
+        $option = unserialize( get_option( $_option_name ) ) ;
+        $option[$_key] = $_value;
+        update_option( $_option_name, serialize( $option ) );
     }
 
     /**

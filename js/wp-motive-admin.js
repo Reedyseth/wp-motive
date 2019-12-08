@@ -52,6 +52,7 @@
                     // Update Plugin Option
                     updatePluginOption( optionsForm, 'wp_motive_data_loaded_status', 'yes' );
                     cacheEndpointData( optionsForm, usersData );
+                    updateLoadedTableTime( optionsForm );
                     bodyContent = ''; // Housekeeping
                 }
                 else {
@@ -137,6 +138,40 @@
         // make the request to the server to ask if the data loaded is on time limit.
         // if the time limit expired make a new request to the endpoint
         // if the time limit is not expired notify the user that the data loaded is on time limit.
+    }
+
+    function updateLoadedTableTime(_optionsForm)
+    {
+        var nonce = _optionsForm.find('input[name="wp_motive_nonce_update_options"]').val();
+        var data = {
+            "security": nonce,
+            "action": "wp_motive_loaded_table_time"
+        };
+
+        $.ajax({
+            type: "post",
+            url: wp_motive.ajax_url,
+            dataType: "json",
+            data: data
+        }).done(function(result) {
+            if(typeof result === "object" && result.success === true){
+                console.log("Time Recorded Successfully.!!");
+                console.log(result);
+
+            }
+            else if(typeof result === "object" && result.success === false){
+                console.log("Could not retrieve information.!!");
+                console.log(result);
+
+            }
+        }).fail(function ( xhr, status, error) {
+            // Something wrong on the server side.
+            // console.log("Fail status: ");
+            // console.log(status);
+            // console.log("Fail error: ");
+            // console.log(error);
+        });
+        // console.log(wp_motive);
     }
 
     function updatePluginOption( _optionsForm, _option_name, _option_value )

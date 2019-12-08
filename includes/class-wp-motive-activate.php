@@ -33,9 +33,12 @@ class Wp_Motive_Activate {
          * Define the plugin default options
          */
         $options = array(
-            $options_prefix . "request_period" => "3600",
+            $options_prefix . "request_period" => serialize( array(
+                "time" => 3600,
+                "start_datetime" => 0,
+            ) ),
             $options_prefix . "data_loaded_status" => "no",
-            $options_prefix . "cache_users_data" => ""
+            $options_prefix . "cache_users_data" => "",
         );
 
         $logger = new Wp_Motive_Logger();
