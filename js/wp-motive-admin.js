@@ -12,11 +12,10 @@
         var wpMotiveTableBody            = $('.wp-motive-table-data tbody');
         var bodyContent                  = '';
         var wp_motive_data_loaded_status = optionsForm.find('input[name="wp_motive_data_loaded_status"]').val();
-        var wp_motive_request_period     = optionsForm.find('input[name="wp_motive_request_period"]').val();
+        var wp_motive_start_datetime     = optionsForm.find('input[name="wp_motive_start_datetime"]').val();
         var usersData                    = [];
         var self = this;
-        $('.reload-data-container .btn-reload-data').on('click', reloadTable() );
-
+        $('form').on('click', 'button.btn-reload-data', reloadTable );
         if( wp_motive_data_loaded_status === "no" ){
             $.when( endPointRequest( endPoint, wpMotiveTableBody ) ).done( function ( result ) {
 
@@ -53,6 +52,7 @@
                     updatePluginOption( optionsForm, 'wp_motive_data_loaded_status', 'yes' );
                     cacheEndpointData( optionsForm, usersData );
                     updateLoadedTableTime( optionsForm );
+                    $('.wp-motive-notification').text("Data loaded from endpoint");
                     bodyContent = ''; // Housekeeping
                 }
                 else {
@@ -84,6 +84,7 @@
                         }
                     }
                     wpMotiveTableBody.html( bodyContent );
+                    $('.wp-motive-notification').text("Data loaded from cached.");
                     bodyContent = ''; // Housekeeping
                 }
                 else {
@@ -134,10 +135,97 @@
         });
     }
 
-    function reloadTable() {
+    function reloadTable( event, _optionsForm, _wpMotiveTableBody ) {
+        event.preventDefault();
+
+        var optionsForm = $('.wp-motive-form');
+        var wpMotiveTableBody = $('.wp-motive-table-data tbody');
+        var wpMotiveTableBodyContent = $('.wp-motive-table-data tbody').html();
+        var nonce = optionsForm.find('input[name="wp_motive_nonce_update_options"]').val();
+        var data = {
+            "security": nonce,
+            "action": "wp_motive_check_loaded_limit"
+        };
         // make the request to the server to ask if the data loaded is on time limit.
-        // if the time limit expired make a new request to the endpoint
-        // if the time limit is not expired notify the user that the data loaded is on time limit.
+        $.ajax({
+            type: "post",
+            url: wp_motive.ajax_url,
+            dataType: "json",
+            data: data,
+            beforeSend: function (){
+                var bodyContent = '<tr>';
+                bodyContent += '<td colspan="5"><span class="ajax-loader"></span></td>';
+                bodyContent += '</tr>';
+                wpMotiveTableBody.html(bodyContent);
+            }
+        }).done(function(result) {
+            if(typeof result === "object" && result.success === true){
+                // If data is on time notify the user]
+                if( result.data.on_time === true ){
+                    $('.wp-motive-notification').text("You can't make a request to the endpoint until the time limit" +
+                        " is reached, information loaded from cached.");
+                    var bodyContent = '<tr>';
+                    bodyContent += '<td colspan="5"><span class="ajax-loader"></span></td>';
+                    bodyContent += '</tr>';
+                    wpMotiveTableBody.html(wpMotiveTableBodyContent);
+                        // .hide("slow").text("");
+                }
+                else if(result.data.on_time === false){
+                    // Other wise fill the table with the reloaded data.
+                    var bodyContent = '<tr>';
+                    var usersData = [];
+                    var result_data = JSON.parse( result.data.users );
+
+                    for( var key in result_data.data.rows ) {
+                        if( result_data.data.rows.hasOwnProperty( key ) ){
+                            var unixTimeStamp = result_data.data.rows[key].date;
+                            var userDate      = readableDate(unixTimeStamp);
+                            var id            = result_data.data.rows[key].id;
+                            var fname         = result_data.data.rows[key].fname;
+                            var lname         = result_data.data.rows[key].lname;
+                            var email         = result_data.data.rows[key].email;
+                            var user          = {};
+
+                            bodyContent += '<tr>';
+                            bodyContent += '<td>'+ id +'</td>';
+                            bodyContent += '<td>'+ fname +'</td>';
+                            bodyContent += '<td>'+ lname +'</td>';
+                            bodyContent += '<td>'+ email +'</td>';
+                            bodyContent += '<td>'+ userDate +'</td>';
+                            bodyContent += '</tr>';
+                            // We need to persist the information until the next reload.
+                            user.id    = id;
+                            user.fname = fname;
+                            user.lname = lname;
+                            user.email = email;
+                            user.date  = userDate;
+                            // Add it to the array
+                            usersData.push(user);
+                        }
+                    }
+                    wpMotiveTableBody.html( bodyContent );
+                    // Update Plugin Option
+                    updatePluginOption( optionsForm, 'wp_motive_data_loaded_status', 'yes' );
+                    cacheEndpointData( optionsForm, usersData );
+                    updateLoadedTableTime( optionsForm );
+                    $('.wp-motive-notification').text("Data loaded from endpoint");
+                    bodyContent = ''; // Housekeeping
+                }
+            }
+            else if(typeof result === "object" && result.success === false){
+                console.log("Could not retrieve information.!!");
+                console.log(result);
+
+            }
+        }).fail(function ( xhr, status, error) {
+            // Something wrong on the server side.
+            // console.log("Fail status: ");
+            // console.log(status);
+            // console.log("Fail error: ");
+            // console.log(error);
+        });
+
+        return false;
     }
 
     function updateLoadedTableTime(_optionsForm)

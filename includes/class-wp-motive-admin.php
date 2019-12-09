@@ -48,6 +48,7 @@ class Wp_Motive_Admin
         $this->hooks->add_actions("wp_ajax_wp_motive_cache_data", $this, "cache_endpoint_data");
         $this->hooks->add_actions("wp_ajax_wp_motive_load_cache_data", $this, "reload_cache_data");
         $this->hooks->add_actions("wp_ajax_wp_motive_loaded_table_time", $this, "save_loaded_table_time");
+        $this->hooks->add_actions("wp_ajax_wp_motive_check_loaded_limit", $this, "check_loaded_limit");
     }
 
     public function admin_menu()
@@ -91,6 +92,7 @@ class Wp_Motive_Admin
         $update_nonce = wp_create_nonce( "wp_motive_nonce_update_options" );
         $time_period  = unserialize( get_option("wp_motive_request_period") );
         $time         = $time_period["time"];
+        $start_datetime      = $time_period["start_datetime"];
 
         echo "<div class='wp-mail-smtp-page-content'>
                 <form method='POST' action='' autocomplete='off' class='wp-motive-form'>
@@ -106,11 +108,12 @@ class Wp_Motive_Admin
                         <div class='wp-mail-smtp-setting-field'>
                             <div class='reload-data-container'>
                                 <input type='hidden' name='wp_motive_nonce_update_options' value='" . $update_nonce ."'/>
-                                <input type='hidden' name='wp_motive_request_period' value='" . esc_attr( $time ) ."'/>
+                                <input type='hidden' name='wp_motive_start_datetime' value='" . esc_attr( $start_datetime ) ."'/>
                                 <input type='hidden' name='wp_motive_data_loaded_status' value='" . esc_attr( get_option("wp_motive_data_loaded_status") ) ."'/>
-                                <button type='submit' class='wp-mail-smtp-btn wp-mail-smtp-btn-md wp-mail-smtp-btn-orange btn-reload-data'>
+                                <button class='wp-mail-smtp-btn wp-mail-smtp-btn-md wp-mail-smtp-btn-orange btn-reload-data'>
                                     " . __("Reload","wp-motive") ."
                                 </button>
+                                <span class='wp-motive-notification'></span>
                             </div>
                             
                             <table class='wp-motive-table-data'>
@@ -271,6 +274,53 @@ class Wp_Motive_Admin
                 "status" => "ok",
                 "code" => 200,
                 "users_data" => $users_data
+            ];
+            return wp_send_json_success($result);
+        }
+
+        return wp_send_json_error($result);
+    }
+
+    public function check_loaded_limit()
+    {
+        $result = [
+            "status" => "failed",
+            "code" => 401
+        ];
+        // Check Nonce
+        $data = isset($_POST) ? $_POST : null;
+        if( $data !== null ){
+            // Check for the nonce key, if not correct 'check_admin_referer' will die the execution.
+            check_admin_referer("wp_motive_nonce_update_options", "security");
+            //sleep(10);
+            $wp_motive_request_period = unserialize( get_option( "wp_motive_request_period" ) );
+            $on_time = false;
+            $server_output = null;
+            $date = date_create();
+            $unixTimeStamp = date_timestamp_get( $date );
+            // Check difference in time
+            $time_diff = $unixTimeStamp - $wp_motive_request_period["start_datetime"];
+
+            if( $time_diff <= $wp_motive_request_period["time"] ) {
+                $on_time = true;
+            }
+            elseif ( $time_diff > $wp_motive_request_period["time"] )
+            {
+                // Let us use cURL to avoid sending back only the limit result and make another Ajax request on
+                // the frontend
+                if( function_exists( "curl_init" ) ){
+                    $ch = curl_init();
+                    curl_setopt( $ch, CURLOPT_URL, 'https://miusage.com/v1/challenge/1/' );
+                    curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+                    $server_output = curl_exec( $ch );
+                }
+            }
+
+            $result = [
+                "status" => "ok",
+                "code" => 200,
+                "on_time" => $on_time,
+                "users" => $server_output,
             ];
             return wp_send_json_success($result);
         }

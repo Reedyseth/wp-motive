@@ -36,6 +36,14 @@
 
 .reload-data-container {
     margin-bottom: 15px;
-    text-align: right;
+}
+
+.reload-data-container .btn-reload-data{
+    /*float: right;*/
+}
+
+.wp-motive-notification {
+    margin-left: 15px;
+    color: #777;
 }
 /*# sourceMappingURL=smtp-admin.min.css.map */
