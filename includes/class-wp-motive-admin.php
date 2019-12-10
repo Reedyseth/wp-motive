@@ -70,10 +70,13 @@ class Wp_Motive_Admin
     public function display_admin_header()
     {
         $current_page = isset( $_GET['page'] ) ? $_GET['page'] : '';
+        $array_pages = array(
+            "wp_motive_options" => __( 'WP Motive Options', 'wp-motive' ),
+        );
         /**
          * Make Sure that the Admin header is only visible on the WP Motive Page.
          */
-        if( ! $current_page === "wp_motive_options" ){
+        if ( ! array_key_exists(  $current_page, $array_pages) ) {
             return false;
         }
         echo "
@@ -87,8 +90,8 @@ class Wp_Motive_Admin
                     </div>";
     }
 
-    public function admin_page(){
-
+    public function admin_page()
+    {
         $update_nonce = wp_create_nonce( "wp_motive_nonce_update_options" );
         $time_period  = unserialize( get_option("wp_motive_request_period") );
         $time         = $time_period["time"];
