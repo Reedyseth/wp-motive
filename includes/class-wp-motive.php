@@ -40,7 +40,7 @@ class Wp_Motive
 //        $this->load_resources();
         $this->set_locale();
         $this->load_admin();
-        $this->define_public_hooks();
+        $this->load_public();
     }
 
     public function run()
@@ -63,11 +63,11 @@ class Wp_Motive
     }
     private function load_admin()
     {
-        $wp_motive_admin = new Wp_Motive_Admin(\SLUG, $this->getPlugin_url(), \VERSION );
+        $wp_motive_admin = new Wp_Motive_Admin(\SLUG, $this->getPlugin_url(), \VERSION);
     }
-    private function define_public_hooks()
+    private function load_public()
     {
-
+        $wp_motive_public = new Wp_Motive_Public(\SLUG, $this->getPlugin_url(), \VERSION );
     }
 
     private function setPlugin_url() {

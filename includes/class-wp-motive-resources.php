@@ -39,4 +39,15 @@ class Wp_Motive_Resources {
         $path = $this->plugin_url . "css/wp-motive-admin-style.css";
         wp_enqueue_style( "wp-motive-admin-styles", $path );
     }
+
+    public function enqueue_public_scripts() {
+        $path = $this->plugin_url . "js/wp-motive-public.js";
+        wp_enqueue_script( "wp-motive-public-scripts", $path, array("jquery"), $this->plugin_version, true );
+        wp_localize_script("wp-motive-public-scripts","wp_motive", ["ajax_url" => admin_url("admin-ajax.php")] );
+    }
+
+    public function enqueue_public_styles() {
+        $path = $this->plugin_url . "css/wp-motive-public-style.css";
+        wp_enqueue_style( "wp-motive-public-styles", $path );
+    }
 }
