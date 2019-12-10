@@ -33,12 +33,13 @@ class Wp_Motive_Activate {
          * Define the plugin default options
          */
         $options = array(
-            $options_prefix . "request_period" => serialize( array(
+            "request_period" => serialize( array(
                 "time" => 3600,
                 "start_datetime" => 0,
             ) ),
-            $options_prefix . "data_loaded_status" => "no",
-            $options_prefix . "cache_users_data" => "",
+            "data_loaded_status" => "no",
+            "cache_users_data" => "",
+            "users_data_override" => false, // Use to force the information reload
         );
 
         $logger = new Wp_Motive_Logger();
@@ -48,7 +49,7 @@ class Wp_Motive_Activate {
          * Create the options in WordPress
          */
         foreach ( $options as $key => $value ){
-            add_option( $key, $value );
+            add_option( $options_prefix . $key, $value );
         }
     }
 
