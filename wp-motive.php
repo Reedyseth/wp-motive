@@ -26,6 +26,8 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
+
+
 if( file_exists( dirname( __FILE__ ) ) . '/vendor/autoload.php' ) {
     require_once dirname( __FILE__ ) . '/vendor/autoload.php';
 }
@@ -58,11 +60,23 @@ register_deactivation_hook( __FILE__, 'deactivate_wp_motive' );
 /**
  * Begins execution of the plugin.
  *
- * @since    1.0.0
+ * @version    1.0.0
  */
 function run_wp_motive() {
 
     $plugin = new Wp_Motive\Wp_Motive();
     $plugin->run();
 }
+
 run_wp_motive();
+/**
+ * Load the CLI commmands just when WP_CLI is defined.
+ *
+ * @since 11-Dic-2019
+ * @version 1.0.0
+ * @author Israel Barragan (Reedyseth) <reedyseth@gmail.com>
+ */
+if ( defined( 'WP_CLI' ) && WP_CLI ) {
+    $cli_instance = new Wp_Motive\Wp_Motive_Wp_Cli();
+    WP_CLI::add_command( 'motive', $cli_instance );
+}
