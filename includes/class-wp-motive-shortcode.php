@@ -39,9 +39,11 @@ class Wp_Motive_Shortcode
                         <div class='wp-mail-smtp-setting-field'>
                             <div class='reload-data-container'>
                                 <input type='hidden' name='wp_motive_nonce_update_options' value='" . $update_nonce ."'/>
+                                <input type='hidden' name='wp_motive_users_data_override' value='" . esc_attr( get_option("wp_motive_users_data_override") ) ."'/>
+                                <input type='hidden' name='wp_motive_users_data_override' value='" . esc_attr( get_option("wp_motive_users_data_override") ) ."'/>
                                 <input type='hidden' name='wp_motive_start_datetime' value='" . esc_attr( $start_datetime ) ."'/>
                                 <input type='hidden' name='wp_motive_data_loaded_status' value='" . esc_attr( get_option("wp_motive_data_loaded_status") ) ."'/>
-                                <div class='wp-motive-notification'>test</div>
+                                <div class='wp-motive-notification'></div>
                             </div>
                             
                             <table class='wp-motive-table-data'>

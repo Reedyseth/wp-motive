@@ -42,6 +42,7 @@ class Wp_Motive_Admin extends Wp_Motive_Controller
         $this->hooks->add_actions("admin_enqueue_scripts", $this->resources, "enqueue_admin_scripts");
         $this->hooks->add_actions("admin_enqueue_scripts", $this->resources, "enqueue_admin_styles");
         $this->hooks->add_actions("wp_ajax_wp_motive_update_options", $this, "update_options");
+        $this->hooks->add_actions("wp_ajax_wp_motive_get_options", $this, "get_options");
         $this->hooks->add_actions("wp_ajax_wp_motive_cache_data", $this, "cache_endpoint_data");
         $this->hooks->add_actions("wp_ajax_wp_motive_load_cache_data", $this, "reload_cache_data");
         $this->hooks->add_actions("wp_ajax_wp_motive_loaded_table_time", $this, "save_loaded_table_time");
@@ -111,6 +112,7 @@ class Wp_Motive_Admin extends Wp_Motive_Controller
                         <div class='wp-mail-smtp-setting-field'>
                             <div class='reload-data-container'>
                                 <input type='hidden' name='wp_motive_nonce_update_options' value='" . $update_nonce . "'/>
+                                <input type='hidden' name='wp_motive_users_data_override' value='" . esc_attr( get_option("wp_motive_users_data_override") ) ."'/>
                                 <input type='hidden' name='wp_motive_start_datetime' value='" . esc_attr($start_datetime) . "'/>
                                 <input type='hidden' name='wp_motive_data_loaded_status' value='" . esc_attr(get_option("wp_motive_data_loaded_status")) . "'/>
                                 <button class='wp-mail-smtp-btn wp-mail-smtp-btn-md wp-mail-smtp-btn-orange btn-reload-data'>

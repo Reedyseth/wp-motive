@@ -55,6 +55,39 @@ class Wp_Motive_Controller
 
         return wp_send_json_error($result);
     }
+    /**
+     * Get a Plugin Option with the given name and value.
+     *
+     * @version 1.0.0
+     * @since 04-Dic-2019
+     * @author Israel Barragan (Reedyseth) <reedyseth@gmail.com>
+     *
+     * @return json encoded data with the result.
+     */
+    public function get_options()
+    {
+        $result = [
+            "status" => "failed",
+            "code" => 401
+        ];
+        // Check Nonce
+        $data = isset($_POST) ? $_POST : null;
+        if( $data !== null ){
+            $option_name = sanitize_text_field(trim($_POST["option_name"]));
+            // Check for the nonce key, if not correct 'check_admin_referer' will die the execution.
+            check_admin_referer("wp_motive_nonce_update_options", "security");
+
+            $option_value = get_option( $option_name );
+            $result = [
+                "status" => "ok",
+                "code" => 200,
+                "option_value" => $option_value,
+            ];
+            return wp_send_json_success($result);
+        }
+
+        return wp_send_json_error($result);
+    }
 
     public function save_loaded_table_time()
     {

@@ -12,7 +12,7 @@
         var wpMotiveTableBody            = $('.wp-motive-table-data tbody');
         var bodyContent                  = '';
         var wp_motive_data_loaded_status = optionsForm.find('input[name="wp_motive_data_loaded_status"]').val();
-        var wp_motive_start_datetime     = optionsForm.find('input[name="wp_motive_start_datetime"]').val();
+        var wp_motive_users_data_override= optionsForm.find('input[name="wp_motive_users_data_override"]').val();
         var usersData                    = [];
 
         if( wp_motive_data_loaded_status === "no" ){
@@ -52,6 +52,55 @@
                     cacheEndpointData( optionsForm, usersData );
                     updateLoadedTableTime( optionsForm );
                     $('.wp-motive-notification').text("Data loaded from endpoint");
+                    bodyContent = ''; // Housekeeping
+                }
+                else {
+                    bodyContent += '<tr>';
+                    bodyContent += '<td colspan="5">No data to show</td>';
+                    bodyContent += '</tr>';
+                    wpMotiveTableBody.html( bodyContent );
+                    bodyContent = ''; // Housekeeping
+                }
+            });
+        }
+        else if( wp_motive_data_loaded_status === "yes" && wp_motive_users_data_override === "yes" ){
+            $.when( endPointRequest( endPoint, wpMotiveTableBody ) ).done( function ( result ) {
+
+                if ( result !== undefined ) {
+                    for( var key in result.data.rows ) {
+                        if( result.data.rows.hasOwnProperty( key ) ){
+                            var unixTimeStamp = result.data.rows[key].date;
+                            var userDate      = readableDate(unixTimeStamp);
+                            var id            = result.data.rows[key].id;
+                            var fname         = result.data.rows[key].fname;
+                            var lname         = result.data.rows[key].lname;
+                            var email         = result.data.rows[key].email;
+                            var user          = {};
+
+                            bodyContent += '<tr>';
+                            bodyContent += '<td>'+ result.data.rows[key].id +'</td>';
+                            bodyContent += '<td>'+ result.data.rows[key].fname +'</td>';
+                            bodyContent += '<td>'+ result.data.rows[key].lname +'</td>';
+                            bodyContent += '<td>'+ result.data.rows[key].email +'</td>';
+                            bodyContent += '<td>'+ userDate +'</td>';
+                            bodyContent += '</tr>';
+                            // We need to persist the information until the next reload.
+                            user.id    = id;
+                            user.fname = fname;
+                            user.lname = lname;
+                            user.email = email;
+                            user.date  = userDate;
+                            // Add it to the array
+                            usersData.push(user);
+                        }
+                    }
+                    wpMotiveTableBody.html( bodyContent );
+                    // Update Plugin Option
+                    updatePluginOption( optionsForm, 'wp_motive_data_loaded_status', 'yes' );
+                    updatePluginOption( optionsForm, 'wp_motive_users_data_override', 'no' );
+                    cacheEndpointData( optionsForm, usersData );
+                    updateLoadedTableTime( optionsForm );
+                    $('.wp-motive-notification').text("Data force loaded from WP CLI");
                     bodyContent = ''; // Housekeeping
                 }
                 else {
