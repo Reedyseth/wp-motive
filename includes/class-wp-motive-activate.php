@@ -39,7 +39,7 @@ class Wp_Motive_Activate {
             ) ),
             "data_loaded_status" => "no",
             "cache_users_data" => "",
-            "users_data_override" => false, // Use to force the information reload
+            "users_data_override" => "no", // Use to force the information reload
         );
 
         $logger = new Wp_Motive_Logger();
