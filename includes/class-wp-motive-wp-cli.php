@@ -14,7 +14,7 @@ namespace Wp_Motive;
  */
 class Wp_Motive_Wp_Cli
 {
-    public function force_table_reload( $args )
+    public function reload( $args )
     {
         $valid_arguments = array( 'yes', 'no' );
 
