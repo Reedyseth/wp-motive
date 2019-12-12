@@ -1,24 +1,15 @@
 <?php
 namespace Wp_Motive;
 /**
- *
- * @link       http://behstant.com/blog
- * @since      1.0.0
- * @since      10-Dic-2019
- * @author     Israel Barragan (Reedyseth) <reedyseth@gmail.com>
- *
- * @package    Wp_Motive
- * @subpackage Wp_Motive/includes
- */
-
-/**
  * This class define the functionality of the Plugin.
  *
  * @class Wp_Motive
- * @since      1.0.0
+ * @version    1.0.0
+ * @since      10-Dic-2019
  * @package    Wp_Motive
  * @subpackage Wp_Motive/includes
  * @author     Israel Barragan (Reedyseth) <reedyseth@gmail.com>
+ * @link       http://behstant.com/blog
  */
 class Wp_Motive_Controller
 {
@@ -117,7 +108,7 @@ class Wp_Motive_Controller
 
     /**
      * Retrieve an option value already serialized and convert it to an array. Update
-     * the array value to the given one. This only work at the first level of the array.
+     * the array value to the given one. This only works at the first level of the array.
      * If the array contains more nested arrays then some other method should be use.
      *
      * @since 08-Dic-2019

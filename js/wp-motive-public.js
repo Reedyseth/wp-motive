@@ -1,5 +1,5 @@
 /**
- * Main Script for the Admin Area
+ * Main Script for the Public Area
  * @since 02-Dic-2019
  * @version 1.0.0
  * @author Israel Barragan (Reedyseth) <reedyseth@gmail.com>

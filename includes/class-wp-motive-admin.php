@@ -1,24 +1,15 @@
 <?php
 namespace Wp_Motive;
 /**
- *
- * @link       http://behstant.com/blog
- * @since      1.0.0
- * @since      29-Nov-2019
- * @author     Israel Barragan (Reedyseth) <reedyseth@gmail.com>
- *
- * @package    Wp_Motive
- * @subpackage Wp_Motive/includes
- */
-
-/**
  * This class define the functionality of the Plugin in the Admin area.
  *
  * @class Wp_Motive
- * @since      1.0.0
+ * @version    1.0.0
+ * @since      29-Nov-2019
  * @package    Wp_Motive
  * @subpackage Wp_Motive/includes
  * @author     Israel Barragan (Reedyseth) <reedyseth@gmail.com>
+ * @link       http://behstant.com/blog
  */
 class Wp_Motive_Admin extends Wp_Motive_Controller
 {

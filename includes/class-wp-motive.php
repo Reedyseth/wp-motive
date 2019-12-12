@@ -3,20 +3,13 @@ namespace Wp_Motive;
 /**
  * This class define the core functionality of the Plugin.
  *
- * @link       http://behstant.com/blog
- * @since      1.0.0
- * @since      29-Nov-2019
- *
- * @package    Wp_Motive
- * @subpackage Wp_Motive/includes
- */
-
-/**
  * @class Wp_Motive
- * @since      1.0.0
+ * @version    1.0.0
+ * @since      29-Nov-2019
  * @package    Wp_Motive
  * @subpackage Wp_Motive/includes
  * @author     Israel Barragan (Reedyseth) <reedyseth@gmail.com>
+ * @link       http://behstant.com/blog
  */
 class Wp_Motive
 {
@@ -48,14 +41,6 @@ class Wp_Motive
         $logger = new Wp_Motive_Logger();
         $logger->log("Run() function executed.!!\n");
     }
-
-//    private function load_resources()
-//    {
-//        /**
-//         * Enqueue styles according to the page admin|public
-//         */
-//        $resources = new Wp_Motive_Resources( $this->getPlugin_url(), \VERSION );
-//    }
     private function set_locale()
     {
         $plugin_i18n = new Wp_Motive_i18n();
@@ -72,8 +57,6 @@ class Wp_Motive
 
     private function setPlugin_url() {
         $this->plugin_url = plugins_url() . "/wp-motive/";
-//        $logger = new Wp_Motive_Logger();
-//        $logger->log("setPlugin_url() Plugin URL: {$this->plugin_url}\n");
     }
 
     public function getPlugin_url() {

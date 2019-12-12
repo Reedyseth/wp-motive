@@ -1,60 +1,19 @@
 <?php
 namespace Wp_Motive;
 /**
- *
- * @link       http://behstant.com/blog
- * @since      1.0.0
- * @since      29-Nov-2019
- *
- * @package    Wp_Motive
- * @subpackage Wp_Motive/includes
- */
-
-/**
- * Fired during plugin activation.
- *
  * This Class handles the hooks registrations.
  * It registers the hooks defined on $actions and $filters
  *
- * @since      1.0.0
+ * @version    1.0.0
+ * @since      29-Nov-2019
  * @package    Wp_Motive
  * @subpackage Wp_Motive/includes
  * @author     Israel Barragan (Reedyseth) <reedyseth@gmail.com>
+ * @link       http://behstant.com/blog
  */
 class Wp_Motive_Hooks {
     private $actions = [];
     private $filters= [];
-
-    /**
-     * Wp_Motive_Hooks constructor.
-     */
-    public function __construct()
-    {
-    }
-
-    /**
-     *  Enqueue hooks to the $actions array.
-     *
-     * @since 29-Nov-2019
-     * @version 1.0.0
-     * @author Israel Barragan (Reedyseth) <reedyseth@gmail.com>
-     *
-     * @param $hook
-     * @param $component
-     * @param $callback
-     * @param int $priority
-     * @param int $accepted_args
-     */
-    public function add_actions( $hook, $component, $callback, $priority = 10, $accepted_args = 1 )
-    {
-        $this->actions[] = array(
-            'hook'          => $hook,
-            'component'     => $component,
-            'callback'      => $callback,
-            'priority'      => $priority,
-            'accepted_args' => $accepted_args
-        );
-    }
     /**
      *  Enqueue hooks to the $filters array.
      *
@@ -71,6 +30,29 @@ class Wp_Motive_Hooks {
     public function add_filters( $hook, $component, $callback, $priority = 10, $accepted_args = 1 )
     {
         $this->filters[] = array(
+            'hook'          => $hook,
+            'component'     => $component,
+            'callback'      => $callback,
+            'priority'      => $priority,
+            'accepted_args' => $accepted_args
+        );
+    }
+    /**
+     *  Enqueue hooks to the $actions array.
+     *
+     * @since 29-Nov-2019
+     * @version 1.0.0
+     * @author Israel Barragan (Reedyseth) <reedyseth@gmail.com>
+     *
+     * @param $hook
+     * @param $component
+     * @param $callback
+     * @param int $priority
+     * @param int $accepted_args
+     */
+    public function add_actions( $hook, $component, $callback, $priority = 10, $accepted_args = 1 )
+    {
+        $this->actions[] = array(
             'hook'          => $hook,
             'component'     => $component,
             'callback'      => $callback,

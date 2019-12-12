@@ -16,3 +16,17 @@ namespace Wp_Motive;
 if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	exit;
 }
+
+// Delete Plugin Options
+class Wp_Motive_Uninstall
+{
+    private $options;
+
+    public function __construct()
+    {
+        // Get Plugin Options
+        // Delete Plugin Options
+    }
+}
+
+$instance = new Wp_Motive_Uninstall();

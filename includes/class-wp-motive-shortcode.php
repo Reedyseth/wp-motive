@@ -3,7 +3,8 @@ namespace Wp_Motive;
 /**
  * Takes care of the Shortcodes.
  *
- * @since      1.0.0
+ * @version    1.0.0
+ * @since      10-Dic-2019
  * @package    Wp_Motive
  * @subpackage Wp_Motive/includes
  * @author     Israel Barragan (Reedyseth) <reedyseth@gmail.com>

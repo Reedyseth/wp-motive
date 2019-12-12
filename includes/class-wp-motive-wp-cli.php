@@ -6,7 +6,8 @@ namespace Wp_Motive;
  * are handle internally.
  *
  * @class Wp_Motive
- * @since      1.0.0
+ * @version    1.0.0
+ * @since      11-Dic-2019s
  * @package    Wp_Motive
  * @subpackage Wp_Motive/includes
  * @author     Israel Barragan (Reedyseth) <reedyseth@gmail.com>

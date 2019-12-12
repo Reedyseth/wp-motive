@@ -2,22 +2,14 @@
 namespace Wp_Motive;
 /**
  *
- * @link       http://behstant.com/blog/sobre-mi/
- * @since      1.0.0
- * @since      02-Dic-2019
- *
- * @package    Wp_Motive
- * @subpackage Wp_Motive/includes
- */
-
-/**
- *
  * Takes care of the Script and Style Resources.
  *
- * @since      1.0.0
+ * @version    1.0.0
+ * @since      02-Dic-2019
  * @package    Wp_Motive
  * @subpackage Wp_Motive/includes
  * @author     Israel Barragan (Reedyseth) <reedyseth@gmail.com>
+ * @link       http://behstant.com/blog/sobre-mi/
  */
 class Wp_Motive_Resources {
     private $plugin_url = null;

@@ -6,7 +6,7 @@
  * @link              http://behstant.com/blog
  * @since             1.0.0
  * @package           Wp_Motive
- * @since      29-Nov-2019
+ * @since             29-Nov-2019
  *
  * @wordpress-plugin
  * Plugin Name:       Awesome Motive Challenge
@@ -70,7 +70,7 @@ function run_wp_motive() {
 
 run_wp_motive();
 /**
- * Load the CLI commmands just when WP_CLI is defined.
+ * Load the CLI commands just when WP_CLI is defined.
  *
  * @since 11-Dic-2019
  * @version 1.0.0
