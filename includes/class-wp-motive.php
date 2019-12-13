@@ -21,8 +21,8 @@ class Wp_Motive
 
     public function __construct()
     {
-        if( defined( PLUGIN_NAME_VERSION ) ){
-            $this->plugin_version = PLUGIN_NAME_VERSION;
+        if( defined( \PLUGIN_VERSION_VERSION ) ){
+            $this->plugin_version = \PLUGIN_VERSION_VERSION;
         }
         else {
             $this->plugin_version = "1.0.0";
@@ -47,11 +47,11 @@ class Wp_Motive
     }
     private function load_admin()
     {
-        $wp_motive_admin = new Wp_Motive_Admin(\SLUG, $this->getPlugin_url(), \VERSION);
+        $wp_motive_admin = new Wp_Motive_Admin(\SLUG, $this->getPlugin_url(), \PLUGIN_VERSION_VERSION);
     }
     private function load_public()
     {
-        $wp_motive_public = new Wp_Motive_Public(\SLUG, $this->getPlugin_url(), \VERSION );
+        $wp_motive_public = new Wp_Motive_Public(\SLUG, $this->getPlugin_url(), \PLUGIN_VERSION_VERSION );
     }
 
     private function setPlugin_url() {

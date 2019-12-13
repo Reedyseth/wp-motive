@@ -35,7 +35,7 @@ if( file_exists( dirname( __FILE__ ) ) . '/vendor/autoload.php' ) {
  * Currently plugin version.
  * Start at version 1.0.0 and use SemVer - https://semver.org
  */
-define( 'VERSION','1.0.0' );
+define( 'PLUGIN_VERSION_VERSION','1.0.0' );
 /**
  * The slug of the plugin, on this case wp-motive
  */
