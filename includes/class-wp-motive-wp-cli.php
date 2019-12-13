@@ -30,7 +30,6 @@ class Wp_Motive_Wp_Cli
                 \WP_CLI::success( "[WP-Motive] Force Table Reload to 'yes'" );
             }
             elseif( 'no' === $args[0] ){
-                update_option( 'wp_motive_users_data_override', 'yes' );
                 \WP_CLI::success( "[WP-Motive] Force Table Reload to 'no'" );
             }
             else {
