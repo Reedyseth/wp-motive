@@ -51,7 +51,7 @@ class Wp_Motive_Shortcode
                                 <thead>
                                     <tr>
                                         <th>" . __("ID","wp-motive") ."</th>
-                                        <th>" . __("First Name</","wp-motive") ."</th>
+                                        <th>" . __("First Name","wp-motive") ."</th>
                                         <th>" . __("Last Name","wp-motive") ."</th>
                                         <th>" . __("Email","wp-motive") ."</th>
                                         <th>" . __("Date","wp-motive") ."</th>

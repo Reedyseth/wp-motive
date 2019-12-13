@@ -1,0 +1,98 @@
+# Copyright (C) 2019 reedyseth
+# This file is distributed under the same license as the Awesome Motive Challenge plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: Awesome Motive Challenge 1.0.0\n"
+"Report-Msgid-Bugs-To: http://behstant.com/blog\n"
+"Last-Translator: Israel Barragan <reedyseth@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2019-12-12T13:56:19-07:00\n"
+"PO-Revision-Date: 2019-12-12 13:58-07:00\n"
+"X-Generator: WP-CLI 2.4.0\n"
+"X-Domain: wp-motive\n"
+
+#. Plugin Name of the plugin
+msgid "Awesome Motive Challenge"
+msgstr ""
+
+#. Plugin URI of the plugin
+msgid "https://awesomemotive.com/plugin-test"
+msgstr ""
+
+#. Description of the plugin
+msgid "This is a short description of what the plugin does. It's displayed in the WordPress admin area."
+msgstr ""
+
+#. Author of the plugin
+msgid "reedyseth"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "http://behstant.com/blog"
+msgstr ""
+
+#: includes/class-wp-motive-admin.php:64
+msgid "WP Motive Options"
+msgstr ""
+
+#: includes/class-wp-motive-admin.php:96
+#: includes/class-wp-motive-shortcode.php:36
+msgid "Ajax Endpoint"
+msgstr ""
+
+#: includes/class-wp-motive-admin.php:98
+msgid "This information is fetched from https://miusage.com/v1/challenge/1/"
+msgstr ""
+
+#: includes/class-wp-motive-admin.php:110
+msgid "Reload"
+msgstr ""
+
+#: includes/class-wp-motive-admin.php:118
+#: includes/class-wp-motive-shortcode.php:53
+msgid "ID"
+msgstr ""
+
+#: includes/class-wp-motive-admin.php:119
+#: includes/class-wp-motive-shortcode.php:54
+msgid "First Name"
+msgstr ""
+
+#: includes/class-wp-motive-admin.php:120
+#: includes/class-wp-motive-shortcode.php:55
+msgid "Last Name"
+msgstr ""
+
+#: includes/class-wp-motive-admin.php:121
+#: includes/class-wp-motive-shortcode.php:56
+msgid "Email"
+msgstr ""
+
+#: includes/class-wp-motive-admin.php:122
+#: includes/class-wp-motive-shortcode.php:57
+msgid "Date"
+msgstr ""
+
+#: includes/class-wp-motive-admin.php:125
+#: includes/class-wp-motive-resources.php:52
+#: includes/class-wp-motive-shortcode.php:60
+msgid "No data to show"
+msgstr ""
+
+#: includes/class-wp-motive-resources.php:53
+msgid "Data force loaded from WP CLI."
+msgstr ""
+
+#: includes/class-wp-motive-resources.php:54
+msgid "Data loaded from endpoint."
+msgstr ""
+
+#: includes/class-wp-motive-resources.php:55
+msgid "Data loaded from cached."
+msgstr ""
+
+#: includes/class-wp-motive-resources.php:56
+msgid "You can't make a request to the endpoint until the time limit is reached, information loaded from cached."
+msgstr ""

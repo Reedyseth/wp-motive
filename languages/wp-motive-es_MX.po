@@ -1,0 +1,111 @@
+# Copyright (C) 2019 reedyseth
+# This file is distributed under the same license as the Awesome Motive Challenge plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: Awesome Motive Challenge 1.0.0\n"
+"Report-Msgid-Bugs-To: http://behstant.com/blog\n"
+"POT-Creation-Date: 2019-12-12 15:37-0700\n"
+"PO-Revision-Date: 2019-12-12 15:37-0700\n"
+"Last-Translator: Reedyseth - Israel Barragan <reedyseth@gmail.com>\n"
+"Language-Team: \n"
+"Language: es_MX\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"X-Poedit-KeywordsList: __\n"
+"Plural-Forms: nplurals=2; plural=n !=1;\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: includes/class-wp-motive-admin.php:64
+msgid "WP Motive Options"
+msgstr "Opciones de WP Motive"
+
+#: includes/class-wp-motive-admin.php:65
+msgid "Settings"
+msgstr "Configuraciones"
+
+#: includes/class-wp-motive-admin.php:97
+#: includes/class-wp-motive-shortcode.php:36
+msgid "Ajax Endpoint"
+msgstr "Punto de accesso de Ajax"
+
+#: includes/class-wp-motive-admin.php:99
+msgid "This information is fetched from https://miusage.com/v1/challenge/1/"
+msgstr "Está información es obtenida de https://miusage.com/v1/challenge/1/"
+
+#: includes/class-wp-motive-admin.php:111
+msgid "Reload"
+msgstr "Recargar"
+
+#: includes/class-wp-motive-admin.php:119
+#: includes/class-wp-motive-shortcode.php:53
+msgid "ID"
+msgstr "ID"
+
+#: includes/class-wp-motive-admin.php:120
+#: includes/class-wp-motive-shortcode.php:54
+msgid "First Name"
+msgstr "Nombre"
+
+#: includes/class-wp-motive-admin.php:121
+#: includes/class-wp-motive-shortcode.php:55
+msgid "Last Name"
+msgstr "Apellido"
+
+#: includes/class-wp-motive-admin.php:122
+#: includes/class-wp-motive-shortcode.php:56
+msgid "Email"
+msgstr "Email"
+
+#: includes/class-wp-motive-admin.php:123
+#: includes/class-wp-motive-shortcode.php:57
+msgid "Date"
+msgstr "Fecha"
+
+#: includes/class-wp-motive-admin.php:126
+#: includes/class-wp-motive-resources.php:52
+#: includes/class-wp-motive-shortcode.php:60
+msgid "No data to show"
+msgstr "No hay información para mostrar"
+
+#: includes/class-wp-motive-resources.php:53
+msgid "Data force loaded from WP CLI."
+msgstr "Forzado de carga desde WP CLI"
+
+#: includes/class-wp-motive-resources.php:54
+msgid "Data loaded from endpoint."
+msgstr "Información cargada desde el punto de acceso."
+
+#: includes/class-wp-motive-resources.php:55
+msgid "Data loaded from cached."
+msgstr "Información cargada desde Cache."
+
+#: includes/class-wp-motive-resources.php:56
+msgid ""
+"You can't make a request to the endpoint until the time limit is reached, "
+"information loaded from cached."
+msgstr ""
+"No puedes recargar la información desde el punto de accesso hasta que el "
+"límite de tiempo se haya alcanzado. Información cargada del cache."
+
+#~ msgid "Awesome Motive Challenge"
+#~ msgstr "Awesome Motive Challenge"
+
+#~ msgid "https://awesomemotive.com/plugin-test"
+#~ msgstr "https://awesomemotive.com/plugin-test"
+
+#~ msgid ""
+#~ "This is a short description of what the plugin does. It's displayed in "
+#~ "the WordPress admin area."
+#~ msgstr ""
+#~ "Está es una descripción pequeña de lo que hace el plugin. Se muestra en "
+#~ "el area de administradores de WordPress"
+
+#~ msgid "reedyseth"
+#~ msgstr "reedyseth"
+
+#~ msgid "http://behstant.com/blog"
+#~ msgstr "http://behstant.com/blog"

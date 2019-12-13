@@ -38,13 +38,12 @@ class Wp_Motive
 
     public function run()
     {
-        $logger = new Wp_Motive_Logger();
-        $logger->log("Run() function executed.!!\n");
     }
     private function set_locale()
     {
         $plugin_i18n = new Wp_Motive_i18n();
         $this->hooks->add_actions("plugins_loaded", $plugin_i18n, "load_plugin_textdomain");
+        $this->hooks->load_hooks();
     }
     private function load_admin()
     {

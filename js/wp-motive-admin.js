@@ -52,12 +52,12 @@
                     updatePluginOption( optionsForm, 'wp_motive_data_loaded_status', 'yes' );
                     cacheEndpointData( optionsForm, usersData );
                     updateLoadedTableTime( optionsForm );
-                    $('.wp-motive-notification').text("Data loaded from endpoint");
+                    $('.wp-motive-notification').text( wp_motive.message_endpoint_loaded );
                     bodyContent = ''; // Housekeeping
                 }
                 else {
                     bodyContent += '<tr>';
-                    bodyContent += '<td colspan="5">No data to show</td>';
+                    bodyContent += '<td colspan="5">'+ wp_motive.message_no_data +'</td>';
                     bodyContent += '</tr>';
                     wpMotiveTableBody.html( bodyContent );
                     bodyContent = ''; // Housekeeping
@@ -101,12 +101,12 @@
                     updatePluginOption( optionsForm, 'wp_motive_users_data_override', 'no' );
                     cacheEndpointData( optionsForm, usersData );
                     updateLoadedTableTime( optionsForm );
-                    $('.wp-motive-notification').text("Data force loaded from WP CLI");
+                    $('.wp-motive-notification').text( wp_motive.message_cli_loaded );
                     bodyContent = ''; // Housekeeping
                 }
                 else {
                     bodyContent += '<tr>';
-                    bodyContent += '<td colspan="5">No data to show</td>';
+                    bodyContent += '<td colspan="5">'+ wp_motive.message_no_data +'</td>';
                     bodyContent += '</tr>';
                     wpMotiveTableBody.html( bodyContent );
                     bodyContent = ''; // Housekeeping
@@ -133,12 +133,12 @@
                         }
                     }
                     wpMotiveTableBody.html( bodyContent );
-                    $('.wp-motive-notification').text("Data loaded from cached.");
+                    $('.wp-motive-notification').text( wp_motive.message_cache_loaded );
                     bodyContent = ''; // Housekeeping
                 }
                 else {
                     bodyContent += '<tr>';
-                    bodyContent += '<td colspan="5">No data to show</td>';
+                    bodyContent += '<td colspan="5">'+ wp_motive.message_no_data +'</td>';
                     bodyContent += '</tr>';
                     wpMotiveTableBody.html( bodyContent );
                     bodyContent = ''; // Housekeeping
@@ -267,7 +267,7 @@
                                     usersData.push(user);
                                 }
                             }
-                            $('.wp-motive-notification').text("Data force loaded from WP CLI");
+                            $('.wp-motive-notification').text( wp_motive.message_cli_loaded );
                             wpMotiveTableBody.html(bodyContent);
                             // Update Plugin Option
                             updatePluginOption(optionsForm, 'wp_motive_data_loaded_status', 'yes');
@@ -277,7 +277,7 @@
                             bodyContent = ''; // Housekeeping
                         } else {
                             bodyContent += '<tr>';
-                            bodyContent += '<td colspan="5">No data to show</td>';
+                            bodyContent += '<td colspan="5">'+ wp_motive.message_no_data +'</td>';
                             bodyContent += '</tr>';
                             wpMotiveTableBody.html(bodyContent);
                             bodyContent = ''; // Housekeeping
@@ -285,8 +285,7 @@
                     });
                 } // If data is on time notify the user
                 else if (data2.data.on_time === true) {
-                    $('.wp-motive-notification').text("You can't make a request to the endpoint until the time limit" +
-                        " is reached, information loaded from cached.");
+                    $('.wp-motive-notification').text( wp_motive.message_limit_loaded );
                     var bodyContent = '<tr>';
                     bodyContent += '<td colspan="5"><span class="ajax-loader"></span></td>';
                     bodyContent += '</tr>';
@@ -329,7 +328,7 @@
                     updatePluginOption(optionsForm, 'wp_motive_data_loaded_status', 'yes');
                     cacheEndpointData(optionsForm, usersData);
                     updateLoadedTableTime(optionsForm);
-                    $('.wp-motive-notification').text("Data loaded from endpoint");
+                    $('.wp-motive-notification').text( wp_motive.message_endpoint_loaded );
                     bodyContent = ''; // Housekeeping
                 }
             } else if (typeof result === "object" && result.success === false) {

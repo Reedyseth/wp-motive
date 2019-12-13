@@ -11,7 +11,7 @@ namespace Wp_Motive;
  * @author     Israel Barragan (Reedyseth) <reedyseth@gmail.com>
  * @link       http://behstant.com/blog/sobre-mi/
  */
-class Wp_Motive_Resources {
+class Wp_Motive_Resources extends Wp_Motive_i18n {
     private $plugin_url = null;
     private $plugin_version = null;
 
@@ -24,7 +24,8 @@ class Wp_Motive_Resources {
     public function enqueue_admin_scripts() {
         $path = $this->plugin_url . "js/wp-motive-admin.js";
         wp_enqueue_script( "wp-motive-admin-scripts", $path, array("jquery"), $this->plugin_version, true );
-        wp_localize_script("wp-motive-admin-scripts","wp_motive", ["ajax_url" => admin_url("admin-ajax.php")] );
+        $this->define_localization();
+        wp_localize_script("wp-motive-admin-scripts","wp_motive", $this->get_localize() );
     }
 
     public function enqueue_admin_styles() {
@@ -35,7 +36,8 @@ class Wp_Motive_Resources {
     public function enqueue_public_scripts() {
         $path = $this->plugin_url . "js/wp-motive-public.js";
         wp_enqueue_script( "wp-motive-public-scripts", $path, array("jquery"), $this->plugin_version, true );
-        wp_localize_script("wp-motive-public-scripts","wp_motive", ["ajax_url" => admin_url("admin-ajax.php")] );
+        $this->define_localization();
+        wp_localize_script("wp-motive-public-scripts","wp_motive", $this->get_localize() );
     }
 
     public function enqueue_public_styles() {

@@ -62,6 +62,7 @@ class Wp_Motive_Admin extends Wp_Motive_Controller
             $current_page = isset($_GET['page']) ? $_GET['page'] : '';
             $array_pages = array(
                 "wp_motive_options" => __('WP Motive Options', 'wp-motive'),
+                "wp_motive_settings" => __('Settings', 'wp-motive'),
             );
             /**
              * Make Sure that the Admin header is only visible on the WP Motive Page.
@@ -74,9 +75,9 @@ class Wp_Motive_Admin extends Wp_Motive_Controller
                 <div class='wrap' id='wp-mail-smtp'>
                     <div class='wp-mail-smtp-page-title'>                                                                                                                                            
                                 <a href='admin.php?page=wp_motive_options' class='tab active'>         
-                                        General</a>                                                                                                                                            
+                                        " . $array_pages['wp_motive_options'] . "</a>                                                                                                                                            
                                 <a href='#' class='tab'>                   
-                                        This could be another Tab</a>
+                                        " . $array_pages['wp_motive_settings'] . "</a>
                     </div>";
         }
     }
@@ -116,7 +117,7 @@ class Wp_Motive_Admin extends Wp_Motive_Controller
                                 <thead>
                                     <tr>
                                         <th>" . __("ID", "wp-motive") . "</th>
-                                        <th>" . __("First Name</", "wp-motive") . "</th>
+                                        <th>" . __("First Name", "wp-motive") . "</th>
                                         <th>" . __("Last Name", "wp-motive") . "</th>
                                         <th>" . __("Email", "wp-motive") . "</th>
                                         <th>" . __("Date", "wp-motive") . "</th>

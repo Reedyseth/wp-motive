@@ -51,12 +51,12 @@
                     updatePluginOption( optionsForm, 'wp_motive_data_loaded_status', 'yes' );
                     cacheEndpointData( optionsForm, usersData );
                     updateLoadedTableTime( optionsForm );
-                    $('.wp-motive-notification').text("Data loaded from endpoint");
+                    $('.wp-motive-notification').text( wp_motive.message_endpoint_loaded );
                     bodyContent = ''; // Housekeeping
                 }
                 else {
                     bodyContent += '<tr>';
-                    bodyContent += '<td colspan="5">No data to show</td>';
+                    bodyContent += '<td colspan="5">'+ wp_motive.message_no_data +'</td>';
                     bodyContent += '</tr>';
                     wpMotiveTableBody.html( bodyContent );
                     bodyContent = ''; // Housekeeping
@@ -100,12 +100,12 @@
                     updatePluginOption( optionsForm, 'wp_motive_users_data_override', 'no' );
                     cacheEndpointData( optionsForm, usersData );
                     updateLoadedTableTime( optionsForm );
-                    $('.wp-motive-notification').text("Data force loaded from WP CLI");
+                    $('.wp-motive-notification').text( wp_motive.message_cli_loaded );
                     bodyContent = ''; // Housekeeping
                 }
                 else {
                     bodyContent += '<tr>';
-                    bodyContent += '<td colspan="5">No data to show</td>';
+                    bodyContent += '<td colspan="5">'+ wp_motive.message_no_data +'</td>';
                     bodyContent += '</tr>';
                     wpMotiveTableBody.html( bodyContent );
                     bodyContent = ''; // Housekeeping
@@ -132,12 +132,12 @@
                         }
                     }
                     wpMotiveTableBody.html( bodyContent );
-                    $('.wp-motive-notification').text("Data loaded from cached.");
+                    $('.wp-motive-notification').text( wp_motive.message_cache_loaded );
                     bodyContent = ''; // Housekeeping
                 }
                 else {
                     bodyContent += '<tr>';
-                    bodyContent += '<td colspan="5">No data to show</td>';
+                    bodyContent += '<td colspan="5">'+ wp_motive.message_no_data +'</td>';
                     bodyContent += '</tr>';
                     wpMotiveTableBody.html( bodyContent );
                     bodyContent = ''; // Housekeeping
