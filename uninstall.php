@@ -21,12 +21,23 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 class Wp_Motive_Uninstall
 {
     private $options;
+    private $options_prefix = 'wp_motive_';
 
     public function __construct()
     {
         // Get Plugin Options
+
+    }
+
+    public function delete_options()
+    {
         // Delete Plugin Options
+        delete_option( $this->options_prefix . 'request_period' );
+        delete_option( $this->options_prefix . 'data_loaded_status' );
+        delete_option( $this->options_prefix . 'cache_users_data' );
+        delete_option( $this->options_prefix . 'users_data_override' );
     }
 }
 
 $instance = new Wp_Motive_Uninstall();
+$instance->delete_options();
