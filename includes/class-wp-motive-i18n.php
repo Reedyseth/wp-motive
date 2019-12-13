@@ -31,8 +31,9 @@ class Wp_Motive_i18n {
      * Look like when the constructor method call this the global variable $i10n is null when call on
      * get_translations_for_domain() defined on /wpdir/wp-includes/l10n.php
      *
-     * @since
-     * @author Israel Barragan (Reedyseth)
+     * @since 12-Dic-2019
+     * @version 1.0.0
+     * @author Israel Barragan (Reedyseth) <reedyseth@gmail.com>
      *
      */
     public function define_localization()
