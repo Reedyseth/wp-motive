@@ -28,7 +28,7 @@ class Wp_Motive_i18n {
 
     /**
      * Translate text to send it to Javascript. Calling this method from a constructor behaves not correctly.
-     * Look like when the constructor method call this the global variable $i10n is null when call on
+     * Looks like when the constructor method call this the global variable $i10n is null when call on
      * get_translations_for_domain() defined on /wpdir/wp-includes/l10n.php
      *
      * @since 12-Dic-2019

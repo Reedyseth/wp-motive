@@ -198,14 +198,12 @@
             data: data
         }).done(function(result) {
             if(typeof result === "object" && result.success === true){
-                console.log("Time Recorded Successfully.!!");
-                console.log(result);
-
+                // console.log("Time Recorded Successfully.!!");
+                // console.log(result);
             }
             else if(typeof result === "object" && result.success === false){
-                console.log("Could not retrieve information.!!");
-                console.log(result);
-
+                // console.log("Could not retrieve information.!!");
+                // console.log(result);
             }
         }).fail(function ( xhr, status, error) {
             // Something wrong on the server side.
@@ -234,14 +232,12 @@
             data: data
         }).done(function(result) {
             if(typeof result === "object" && result.success === true){
-                console.log("Table Loaded Successfully.!!");
-                console.log(result);
-
+                // console.log("Table Loaded Successfully.!!");
+                // console.log(result);
             }
             else if(typeof result === "object" && result.success === false){
-                console.log("Could not retrieve information.!!");
-                console.log(result);
-
+                // console.log("Could not retrieve information.!!");
+                // console.log(result);
             }
         }).fail(function ( xhr, status, error) {
             // Something wrong on the server side.
@@ -269,14 +265,12 @@
             data: data
         }).done(function(result) {
             if(typeof result === "object" && result.success === true){
-                console.log("Table Cached Successfully.!!");
-                console.log(result);
-
+                // console.log("Table Cached Successfully.!!");
+                // console.log(result);
             }
             else if(typeof result === "object" && result.success === false){
-                console.log("Could not retrieve information.!!");
-                console.log(result);
-
+                // console.log("Could not retrieve information.!!");
+                // console.log(result);
             }
         }).fail(function ( xhr, status, error) {
             // Something wrong on the server side.

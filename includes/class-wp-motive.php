@@ -30,7 +30,6 @@ class Wp_Motive
         $this->setPlugin_url();
         $this->hooks = new Wp_Motive_Hooks();
         $this->shortcodes = new Wp_Motive_Shortcode();
-//        $this->load_resources();
         $this->set_locale();
         $this->load_admin();
         $this->load_public();

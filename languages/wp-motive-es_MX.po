@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Awesome Motive Challenge 1.0.0\n"
 "Report-Msgid-Bugs-To: http://behstant.com/blog\n"
-"POT-Creation-Date: 2019-12-12 15:37-0700\n"
-"PO-Revision-Date: 2019-12-12 15:37-0700\n"
+"POT-Creation-Date: 2019-12-13 16:23-0700\n"
+"PO-Revision-Date: 2019-12-13 16:23-0700\n"
 "Last-Translator: Reedyseth - Israel Barragan <reedyseth@gmail.com>\n"
 "Language-Team: \n"
 "Language: es_MX\n"
@@ -65,25 +65,24 @@ msgstr "Email"
 msgid "Date"
 msgstr "Fecha"
 
-#: includes/class-wp-motive-admin.php:126
-#: includes/class-wp-motive-resources.php:52
+#: includes/class-wp-motive-admin.php:126 includes/class-wp-motive-i18n.php:44
 #: includes/class-wp-motive-shortcode.php:60
 msgid "No data to show"
 msgstr "No hay información para mostrar"
 
-#: includes/class-wp-motive-resources.php:53
+#: includes/class-wp-motive-i18n.php:45
 msgid "Data force loaded from WP CLI."
 msgstr "Forzado de carga desde WP CLI"
 
-#: includes/class-wp-motive-resources.php:54
+#: includes/class-wp-motive-i18n.php:46
 msgid "Data loaded from endpoint."
 msgstr "Información cargada desde el punto de acceso."
 
-#: includes/class-wp-motive-resources.php:55
+#: includes/class-wp-motive-i18n.php:47
 msgid "Data loaded from cached."
 msgstr "Información cargada desde Cache."
 
-#: includes/class-wp-motive-resources.php:56
+#: includes/class-wp-motive-i18n.php:48
 msgid ""
 "You can't make a request to the endpoint until the time limit is reached, "
 "information loaded from cached."
